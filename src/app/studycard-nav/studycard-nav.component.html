@@ -13,7 +13,9 @@
         </li>
       </ul>
       <span class="navbar-text actions">
-        <a class="btn btn-light action-button" role="button" routerLink="/login">Sign In</a>
+        <span>{{userName}}</span>
+        <a class="btn btn-light action-button" role="button" routerLink="/login" *ngIf="!isLoggedin">Sign In</a>
+        <a class="btn btn-light action-button" role="button" (click)="logout()" *ngIf="isLoggedin">Sign Out </a>
       </span>
     </div>
   </div>
