@@ -1,3 +1,69 @@
 <div>
   <app-studycard-nav></app-studycard-nav>
 </div>
+
+<mat-form-field>
+  <mat-select placeholder="Category name" [(value)]="myCategoryId" (change)="onSelectCategory()">
+    <mat-option *ngFor="let category of categories | async" [value]="category.categoryId">
+      {{ category.categoryName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="!myCategoryId">
+  <h1>You're Selected Any Category...</h1>
+</div>
+<div *ngIf="myCategoryId">
+  <div class="example-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource">
+
+      <!-- Question Column -->
+      <ng-container matColumnDef="question">
+        <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.question}} </mat-cell>
+      </ng-container>
+
+      <!-- Answer Column -->
+      <ng-container matColumnDef="answer">
+        <mat-header-cell *matHeaderCellDef> Answer </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.answer}} </mat-cell>
+      </ng-container>
+
+      <!-- Source Column -->
+      <ng-container matColumnDef="source">
+        <mat-header-cell *matHeaderCellDef> Source </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.source}} </mat-cell>
+      </ng-container>
+
+      <!-- Repetition Column -->
+      <ng-container matColumnDef="repetition">
+        <mat-header-cell *matHeaderCellDef> Repetition </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.repetition}} </mat-cell>
+      </ng-container>
+
+      <!-- Stage Column -->
+      <ng-container matColumnDef="stage">
+        <mat-header-cell *matHeaderCellDef> Stage </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.stage}} </mat-cell>
+      </ng-container>
+
+      <!-- ModifiedDate Column -->
+      <ng-container matColumnDef="modifiedDate">
+        <mat-header-cell *matHeaderCellDef> ModifiedDate </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.modifiedDate.toDate()}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>
