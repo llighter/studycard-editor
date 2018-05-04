@@ -21,41 +21,41 @@
       </mat-form-field>
     </div>
 
-    <mat-table #table [dataSource]="dataSource">
+    <mat-table #table [dataSource]="dataSource" matSort>
 
       <!-- Question Column -->
       <ng-container matColumnDef="question">
-        <mat-header-cell *matHeaderCellDef> Question </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Question </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.question}} </mat-cell>
       </ng-container>
 
       <!-- Answer Column -->
       <ng-container matColumnDef="answer">
-        <mat-header-cell *matHeaderCellDef> Answer </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Answer </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.answer}} </mat-cell>
       </ng-container>
 
       <!-- Source Column -->
       <ng-container matColumnDef="source">
-        <mat-header-cell *matHeaderCellDef> Source </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Source </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.source}} </mat-cell>
       </ng-container>
 
       <!-- Repetition Column -->
       <ng-container matColumnDef="repetition">
-        <mat-header-cell *matHeaderCellDef> Repetition </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Repetition </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.repetition}} </mat-cell>
       </ng-container>
 
       <!-- Stage Column -->
       <ng-container matColumnDef="stage">
-        <mat-header-cell *matHeaderCellDef> Stage </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Stage </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.stage}} </mat-cell>
       </ng-container>
 
       <!-- ModifiedDate Column -->
       <ng-container matColumnDef="modifiedDate">
-        <mat-header-cell *matHeaderCellDef> ModifiedDate </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ModifiedDate </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.modifiedDate.toDate()}} </mat-cell>
       </ng-container>
 

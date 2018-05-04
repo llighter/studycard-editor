@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 
 import { Card } from '../domain/card';
 import { Category } from '../domain/category';
+import { MatSort } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -26,7 +27,7 @@ export class StudycardHomeComponent implements OnInit {
   displayedColumns = ['question', 'answer', 'source', 'repetition', 'stage', 'modifiedDate'];
   dataSource = new MatTableDataSource<Card>();
 
-
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _auth: AuthService
@@ -52,8 +53,8 @@ export class StudycardHomeComponent implements OnInit {
       .doc(this.myCategoryId)
       .collection('cardDeck');
     this.cardsCollection.valueChanges().forEach((doc: Card[]) => {
-      // this.dataSource = new MatTableDataSource<Card>(doc);
       this.dataSource.data = doc;
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     })
   }

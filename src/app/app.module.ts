@@ -16,11 +16,11 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 
+import { MatSortModule } from "@angular/material/sort";
 import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
 import { MatSelectModule } from "@angular/material/select";
 import { MatPaginatorModule } from "@angular/material/paginator";
-
 
 const appRoutes: Routes = [
   { path: 'home', component: StudycardHomeComponent},
@@ -48,6 +48,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    MatSortModule,
     MatInputModule,
     MatTableModule,
     MatSelectModule,
