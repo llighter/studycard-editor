@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+    <div class="col-lg-10 col-xl-10 offset-lg-1 offset-xl-1">
       <mat-form-field>
         <mat-select placeholder="Category name" [(value)]="myCategoryId" (change)="onSelectCategory()">
           <mat-option *ngFor="let category of categories | async" [value]="category.categoryId">
@@ -83,14 +83,14 @@
 
             <!-- CreatedDate Column -->
             <ng-container matColumnDef="createdDate">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedDate </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.createdDate.toDate() | date:'MM-dd HH:mm'}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.createdDate.toDate() | date:'MM-dd'}} </mat-cell>
             </ng-container>
 
             <!-- ModifiedDate Column -->
             <ng-container matColumnDef="modifiedDate">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> ModifiedDate </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.modifiedDate.toDate() | date:'MM-dd HH:mm'}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Modified </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.modifiedDate.toDate() | date:'MM-dd'}} </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
