@@ -2,68 +2,105 @@
   <app-studycard-nav></app-studycard-nav>
 </div>
 
-<mat-form-field>
-  <mat-select placeholder="Category name" [(value)]="myCategoryId" (change)="onSelectCategory()">
-    <mat-option *ngFor="let category of categories | async" [value]="category.categoryId">
-      {{ category.categoryName }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-<div *ngIf="!myCategoryId">
-  <h1>You're Selected Any Category...</h1>
-</div>
-<div *ngIf="myCategoryId">
-  <div class="example-container mat-elevation-z8">
-    <div class="example-header">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <mat-select placeholder="Category name" [(value)]="myCategoryId" (change)="onSelectCategory()">
+          <mat-option *ngFor="let category of categories | async" [value]="category.categoryId">
+            {{ category.categoryName }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
+
+      <div *ngIf="!myCategoryId">
+        <h1>You're not selected Any Category...</h1>
+      </div>
+      <div *ngIf="myCategoryId">
+        <div class="example-container mat-elevation-z8">
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field>
+                  <input matInput [(ngModel)]="tempSource" placeholder="Source">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput [(ngModel)]="tempQuestion" placeholder="Question">
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field>
+                  <input matInput [(ngModel)]="tempAnswer" placeholder="Answer">
+                </mat-form-field>
+              </td>
+              <td>
+                <button mat-raised-button color="primary" (click)="insertCard()">insert</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="example-container mat-elevation-z8">
+          <div class="example-header">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+          </div>
+
+          <mat-table #table [dataSource]="dataSource" matSort>
+
+            <!-- Question Column -->
+            <ng-container matColumnDef="question">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Question </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.question}} </mat-cell>
+            </ng-container>
+
+            <!-- Answer Column -->
+            <ng-container matColumnDef="answer">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Answer </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.answer}} </mat-cell>
+            </ng-container>
+
+            <!-- Source Column -->
+            <ng-container matColumnDef="source">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Source </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.source}} </mat-cell>
+            </ng-container>
+
+            <!-- Repetition Column -->
+            <ng-container matColumnDef="repetition">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Repetition </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.repetition}} </mat-cell>
+            </ng-container>
+
+            <!-- Stage Column -->
+            <ng-container matColumnDef="stage">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Stage </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.stage}} </mat-cell>
+            </ng-container>
+
+            <!-- CreatedDate Column -->
+            <ng-container matColumnDef="createdDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> CreatedDate </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.createdDate.toDate() | date:'MM-dd HH:mm'}} </mat-cell>
+            </ng-container>
+
+            <!-- ModifiedDate Column -->
+            <ng-container matColumnDef="modifiedDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> ModifiedDate </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.modifiedDate.toDate() | date:'MM-dd HH:mm'}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+
+          <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+          </mat-paginator>
+        </div>
+      </div>
     </div>
-
-    <mat-table #table [dataSource]="dataSource" matSort>
-
-      <!-- Question Column -->
-      <ng-container matColumnDef="question">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Question </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.question}} </mat-cell>
-      </ng-container>
-
-      <!-- Answer Column -->
-      <ng-container matColumnDef="answer">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Answer </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.answer}} </mat-cell>
-      </ng-container>
-
-      <!-- Source Column -->
-      <ng-container matColumnDef="source">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Source </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.source}} </mat-cell>
-      </ng-container>
-
-      <!-- Repetition Column -->
-      <ng-container matColumnDef="repetition">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Repetition </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.repetition}} </mat-cell>
-      </ng-container>
-
-      <!-- Stage Column -->
-      <ng-container matColumnDef="stage">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Stage </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.stage}} </mat-cell>
-      </ng-container>
-
-      <!-- ModifiedDate Column -->
-      <ng-container matColumnDef="modifiedDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> ModifiedDate </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.modifiedDate.toDate()}} </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
-    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-    </mat-paginator>
   </div>
 </div>
