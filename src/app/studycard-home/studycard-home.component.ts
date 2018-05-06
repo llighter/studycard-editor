@@ -71,8 +71,6 @@ export class StudycardHomeComponent implements OnInit {
   }
 
   insertCard() {
-    alert(`Test: ${this.tempSource}, ${this.tempQuestion}, ${this.tempAnswer}`);
-
     const id = this.afs.createId();
     const card: Card = {
       cardID: id,
