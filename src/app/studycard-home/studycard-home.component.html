@@ -14,33 +14,33 @@
       </mat-form-field>
 
       <div *ngIf="!myCategoryId">
-        <h1>You're not selected Any Category...</h1>
+        <h2>Please set a category.</h2>
       </div>
       <div *ngIf="myCategoryId">
-        <div class="example-container mat-elevation-z8">
-          <table class="example-full-width" cellspacing="0">
-            <tr>
-              <td>
-                <mat-form-field>
-                  <input matInput [(ngModel)]="tempSource" placeholder="Source">
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field>
-                  <input matInput [(ngModel)]="tempQuestion" placeholder="Question">
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field>
-                  <input matInput [(ngModel)]="tempAnswer" placeholder="Answer">
-                </mat-form-field>
-              </td>
-              <td>
-                <button mat-raised-button color="primary" (click)="insertCard()">insert</button>
-              </td>
-            </tr>
-          </table>
-        </div>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>Card Form</mat-card-title>
+            <mat-card-subtitle>Enter the contents of the card</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field>
+              <input matInput [(ngModel)]="tempSource" placeholder="Source">
+            </mat-form-field>
+
+            <mat-form-field>
+              <textarea matInput [(ngModel)]="tempQuestion" placeholder="Question"></textarea>
+            </mat-form-field>
+
+            <mat-form-field>
+              <textarea matInput [(ngModel)]="tempAnswer" placeholder="Answer"></textarea>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="insertCard()">insert</button>
+          </mat-card-actions>
+        </mat-card>
+
+        <br><br>
 
         <div class="example-container mat-elevation-z8">
           <div class="example-header">

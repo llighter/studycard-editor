@@ -1,4 +1,8 @@
 /* Structure */
+.example-card {
+  max-width: 500px;
+}
+
 .example-container {
   display: flex;
   flex-direction: column;
@@ -15,9 +19,13 @@
   width: 100%;
 }
 
+.mat-card-actions {
+  padding-left: 15px;
+}
+
 .mat-table {
   overflow: auto;
-  max-height: 500px;
+  max-height: 600px;
 }
 
 /* Column Widths */

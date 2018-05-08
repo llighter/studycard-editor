@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
+import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,
+    MatCardModule,
     MatSortModule,
     MatInputModule,
     MatTableModule,
